@@ -1,0 +1,35 @@
+us-gaap:Assets = Assets are the resources owned or controlled by a company that provide future economic benefits.
+
+us-gaap:Liabilities = Liabilities represent a company’s obligations to pay debts or settle commitments.
+
+us-gaap:Equity = Equity is the residual interest in the assets of an entity after deducting liabilities, commonly referred to as shareholders' equity.
+
+us-gaap:Revenue = Revenue is the income generated from normal business operations, typically from the sale of goods or services.
+
+us-gaap:NetIncomeLoss = Net Income (or Loss) is the final profit or loss remaining after all expenses, taxes, and costs are deducted from total revenue.
+
+us-gaap:OperatingIncomeLoss = Operating income reflects the profit from core business activities, excluding non-operational income/expenses.
+
+us-gaap:CashAndCashEquivalents = Cash and cash equivalents are the most liquid current assets found on the balance sheet, including currency, bank accounts, and short-term investments.
+
+us-gaap:DepreciationAndAmortization = Depreciation and amortization are methods of allocating the cost of tangible and intangible assets over their useful life.
+
+us-gaap:CostOfGoodsSold = Cost of Goods Sold represents the direct costs attributable to the production of goods sold by the company.
+
+us-gaap:GrossProfit = Gross profit is the difference between revenue and cost of goods sold.
+
+us-gaap:IncomeTaxExpenseBenefit = Income tax expense (or benefit) represents the amount of taxes due (or refunded) based on earnings before tax.
+
+us-gaap:CurrentAssets = Current assets are assets expected to be converted to cash or used up within one year.
+
+us-gaap:CurrentLiabilities = Current liabilities are obligations the company must pay within the next year.
+
+us-gaap:AccountsReceivable = Accounts receivable represent money owed by customers for goods or services delivered but not yet paid for.
+
+us-gaap:AccountsPayable = Accounts payable is the amount a company owes suppliers for items or services purchased on credit.
+
+us-gaap:EarningsPerShare = Earnings per share (EPS) is calculated as net income divided by the number of outstanding shares of stock.
+
+us-gaap:ComprehensiveIncomeNetOfTax = Comprehensive income includes net income and other gains/losses not reflected in profit or loss, adjusted for tax.
+
+us-gaap:RetainedEarnings = Retained earnings are cumulative profits that have been reinvested in the business rather than paid out as dividends.

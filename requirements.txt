@@ -1,0 +1,14 @@
+# Core
+langchain>=0.1.13
+langchain-community>=0.0.18
+chromadb>=0.4.22
+pandas>=2.0
+streamlit>=1.30
+python-dotenv>=1.0
+
+# Local LLM support
+ollama>=0.1.6
+
+# For text document loading (if using PDFs, etc.)
+unstructured
+tiktoken
