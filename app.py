@@ -5,6 +5,7 @@ import traceback
 
 from agents.validator import validate_financial_csv
 from agents.rag_qa import get_financial_rag
+from agents.rag_csv_openai import get_financial_rag_openai  # RAG with OpenAI & Pinecone
 from agents.notifier_email import send_notification_email
 from mcp.controller import build_agent_graph
 
