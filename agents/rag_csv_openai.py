@@ -106,6 +106,6 @@ def test_rag(csv_path: str, question: str):
 
 if __name__ == "__main__":
     # Example usage
-    sample_csv = "datasets/financial_statements.csv"
+    sample_csv = "/Users/geetikavasistha/Downloads/Agentic-AI-Budget-System/datasets/Financial Statements.csv"
     test_question = "What is the net income for 2023?"
     test_rag(sample_csv, test_question)
