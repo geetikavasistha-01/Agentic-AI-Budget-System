@@ -22,7 +22,7 @@ def get_financial_rag():
     split_docs = splitter.split_documents(docs)
 
     # Embedding model
-    embeddings = OllamaEmbeddings(model="mistral")
+    embeddings = OllamaEmbeddings(model="codellama")
 
     # Pinecone init
     pinecone.init(
