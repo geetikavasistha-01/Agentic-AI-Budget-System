@@ -6,7 +6,7 @@ from langchain_openai import OpenAIEmbeddings, OpenAI
 from langchain_community.vectorstores import Pinecone as PineconeVectorStore
 from langchain.schema import Document
 from langchain.chains import RetrievalQA
-import pinecone
+from pinecone import Pinecone, ServerlessSpec
 import logging
 
 # Load environment variables from .env
@@ -16,6 +16,8 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
 PINECONE_ENVIRONMENT = os.getenv("PINECONE_ENVIRONMENT")
 PINECONE_INDEX_NAME = os.getenv("PINECONE_INDEX_NAME")
+PINECONE_CLOUD = os.getenv("PINECONE_CLOUD", "aws")
+PINECONE_REGION = os.getenv("PINECONE_REGION", "us-west-2")
 
 logging.basicConfig(level=logging.INFO)
 
@@ -45,12 +47,19 @@ def build_vectorstore(docs: List[Document], namespace: str = "finance-docs"):
     Embeds docs and stores them in Pinecone under the given namespace.
     Returns a LangChain vectorstore retriever.
     """
-    # Initialize Pinecone
-    pinecone.init(api_key=PINECONE_API_KEY, environment=PINECONE_ENVIRONMENT)
-    if PINECONE_INDEX_NAME not in pinecone.list_indexes():
-        # Create index if it doesn't exist
-        pinecone.create_index(PINECONE_INDEX_NAME, dimension=1536, metric="cosine")
-    index = pinecone.Index(PINECONE_INDEX_NAME)
+    # Initialize Pinecone v3+ API
+    pc = Pinecone(api_key=PINECONE_API_KEY)
+    if PINECONE_INDEX_NAME not in pc.list_indexes().names():
+        pc.create_index(
+            name=PINECONE_INDEX_NAME,
+            dimension=1536,
+            metric="cosine",
+            spec=ServerlessSpec(
+                cloud=PINECONE_CLOUD,
+                region=PINECONE_REGION
+            )
+        )
+    index = pc.Index(PINECONE_INDEX_NAME)
     embeddings = OpenAIEmbeddings(model="text-embedding-ada-002", openai_api_key=OPENAI_API_KEY)
     vectorstore = PineconeVectorStore(
         index=index,

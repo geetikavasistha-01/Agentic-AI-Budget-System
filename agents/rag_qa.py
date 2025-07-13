@@ -6,9 +6,9 @@ from langchain.chains import RetrievalQA
 from langchain_community.llms import Ollama
 from langchain_community.document_loaders import TextLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-import pinecone
 import os
 from dotenv import load_dotenv
+from pinecone import Pinecone, ServerlessSpec
 
 load_dotenv()
 
@@ -24,18 +24,20 @@ def get_financial_rag():
     # Embedding model
     embeddings = OllamaEmbeddings(model="codellama")
 
-    # Pinecone init
-    pinecone.init(
-        api_key=os.getenv("PINECONE_API_KEY"),
-        environment=os.getenv("PINECONE_ENVIRONMENT")
-    )
-
+    # Pinecone v3+ API usage
+    pc = Pinecone(api_key=os.getenv("PINECONE_API_KEY"))
     index_name = os.getenv("PINECONE_INDEX_NAME")
-
     # Check if index exists, otherwise create it
-    if index_name not in pinecone.list_indexes():
-        pinecone.create_index(index_name, dimension=4096, metric="cosine")
-
+    if index_name not in pc.list_indexes().names():
+        pc.create_index(
+            name=index_name,
+            dimension=4096,
+            metric="cosine",
+            spec=ServerlessSpec(
+                cloud=os.getenv("PINECONE_CLOUD", "aws"),
+                region=os.getenv("PINECONE_REGION", "us-west-2")
+            )
+        )
     # Create vector store (loads into Pinecone)
     vectorstore = LangChainPinecone.from_documents(
         split_docs,
