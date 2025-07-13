@@ -56,8 +56,7 @@ def get_financial_rag(
 
     # Set up embeddings and vector store
     embeddings = OllamaEmbeddings(model=ollama_model)
-    vectordb = Chroma.from_documents(split_docs, embeddings, persist_directory=persist_directory)
-
+    vectorstore = Chroma.from_documents(split_docs, embedding=embeddings)
     # Set up retriever and LLM
     retriever = vectordb.as_retriever(search_kwargs={"k": 2})
     llm = Ollama(model=ollama_model)
